@@ -1,0 +1,16 @@
+---
+- name: Install Nginx server and start its service
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+    - name: Copy index.html template
+      template: src=/home/ubuntu/ansible/index.html dest=/var/www/html/index.html
